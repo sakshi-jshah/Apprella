@@ -12,7 +12,7 @@ import javax.swing.*;
 public class Panel {
 	
 	public static void main(String args[]) throws IOException {
-		String[] tempList = { "temp1", "temp2", "temp3" };
+		String[] tempList = { "...", "temp1", "temp2", "temp3" };
 		
 		BufferedImage backgroundImage = ImageIO.read(new File("background_temp.jpeg"));
 		
@@ -31,7 +31,7 @@ public class Panel {
 		f.add(search);
 		
 		// Creating Search Button GUI
-		JButton searchButton = new JButton("Submit");
+		JButton searchButton = new JButton("Search");
 		searchButton.setBounds(640, 40, 100, 20);
 		f.add(searchButton);
 		
@@ -66,7 +66,7 @@ public class Panel {
 		f.add(genre3);
 		
 		// Creating button to enable sorting
-		JButton sortButton = new JButton("Login");
+		JButton sortButton = new JButton("Enter");
 		sortButton.setBounds(640, 300, 100, 20);
 		f.add(sortButton);
 		
