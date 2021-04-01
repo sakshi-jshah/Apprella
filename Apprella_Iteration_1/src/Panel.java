@@ -12,7 +12,9 @@ import javax.swing.*;
 public class Panel {
 	
 	public static void main(String args[]) throws IOException {
-		String[] tempList = { "...", "temp1", "temp2", "temp3" };
+		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education"};
+		String[] priceList = { "...", "Free", "$0.99+", "$1.99+", "$2.99+", "$3.99+"};
+		String[] ratingList = { "...", "Highet Rating", "Lowest Rating"};
 		
 		BufferedImage backgroundImage = ImageIO.read(new File("background_temp.jpeg"));
 		
@@ -44,7 +46,7 @@ public class Panel {
 		JLabel genre1Label = new JLabel("Sort Genre:");
 		genre1Label.setForeground(Color.white);
 		genre1Label.setBounds(640, 120, 220, 20);
-		JComboBox genre = new JComboBox(tempList);
+		JComboBox genre = new JComboBox(genreList);
 		genre.setBounds(640, 140, 220, 20);
 		f.add(genre1Label);
 		f.add(genre);
@@ -52,7 +54,7 @@ public class Panel {
 		JLabel genre2Label = new JLabel("Minimum Price:");
 		genre2Label.setForeground(Color.white);
 		genre2Label.setBounds(640, 180, 220, 20);
-		JComboBox genre2 = new JComboBox(tempList);
+		JComboBox genre2 = new JComboBox(priceList);
 		genre2.setBounds(640, 200, 220, 20);
 		f.add(genre2Label);
 		f.add(genre2);
@@ -60,7 +62,7 @@ public class Panel {
 		JLabel genre3Label = new JLabel("Minimum Rating:");
 		genre3Label.setForeground(Color.white);
 		genre3Label.setBounds(640, 240, 220, 20);
-		JComboBox genre3 = new JComboBox(tempList);
+		JComboBox genre3 = new JComboBox(ratingList);
 		genre3.setBounds(640, 260, 220, 20);
 		f.add(genre3Label);
 		f.add(genre3);
