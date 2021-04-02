@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import org.w3c.dom.events.Event;
+
 
 public class Panel {
-	
 	
 	
 	public static void main(String args[]) throws IOException {
@@ -23,9 +24,15 @@ public class Panel {
 		
 		// Temp list of elements to test printing
 		ArrayList<String> resultTestList = new ArrayList<>();
-		resultTestList.add("Temp 1");
-		resultTestList.add("Temp 2");
-		resultTestList.add("Temp 3");
+		resultTestList.add("Among Us");
+		resultTestList.add("Minecraft");
+		resultTestList.add("TikTok");
+		resultTestList.add("Instagram");
+		resultTestList.add("Procreate");
+		resultTestList.add("Gmail");
+		resultTestList.add("Aprella");
+		resultTestList.add("Twitter");
+		resultTestList.add("Netflix");
 		
 		BufferedImage backgroundImage = ImageIO.read(new File("background_temp.jpeg"));
 		
@@ -96,15 +103,18 @@ public class Panel {
 		
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				IandO.printToResults(resultTestList, returnArea);
+				//IandO.printToResults(resultTestList, returnArea);
+				String text = search.getText();
+				IandO.searchResults(resultTestList, returnArea, text);
 			}
 		});
+		
+		
 		
 		f.setSize(1000,680);
 		f.setLayout(null);
 		f.setVisible(true);
 	}
-	
 	
 	
 }
