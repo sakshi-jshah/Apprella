@@ -10,4 +10,22 @@ public class inputOutputGUI {
 			textArea.append(element + "\n");
 		}
 	}
+	
+	
+	/**
+	 * Takes a list and searches and returns words containing it or are equal to it
+	 * @param list
+	 * @param textArea
+	 * @param str
+	 */
+	public void searchResults(ArrayList<String>list, JTextArea textArea, String str)
+	{
+		for (String element : list)
+		{
+			if(element.contains(str) || str.equals(element))
+			{
+				textArea.append(element + "\n");
+			}
+		}
+	}
 }
