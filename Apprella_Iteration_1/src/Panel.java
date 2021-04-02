@@ -97,6 +97,7 @@ public class Panel {
 		returnLabel.setBounds(20, 80, 600, 20);
 		JTextArea returnArea = new JTextArea();
 		returnArea.setBounds(20, 100, 600, 540);
+		IandO.printToResults(resultTestList, returnArea);
 		f.add(returnLabel);
 		
 		f.add(returnArea);
