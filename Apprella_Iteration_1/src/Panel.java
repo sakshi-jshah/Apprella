@@ -1,9 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,10 +14,18 @@ import javax.swing.*;
 
 public class Panel {
 	
+	
+	
 	public static void main(String args[]) throws IOException {
 		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education"};
 		String[] priceList = { "...", "Free", "$0.99+", "$1.99+", "$2.99+", "$3.99+"};
 		String[] ratingList = { "...", "Highet Rating", "Lowest Rating"};
+		
+		// Temp list of elements to test printing
+		ArrayList<String> resultTestList = new ArrayList<>();
+		resultTestList.add("Temp 1");
+		resultTestList.add("Temp 2");
+		resultTestList.add("Temp 3");
 		
 		BufferedImage backgroundImage = ImageIO.read(new File("background_temp.jpeg"));
 		
@@ -22,6 +33,7 @@ public class Panel {
 		
 		f.setContentPane(new Background_Panel(backgroundImage));
 		
+		inputOutputGUI IandO = new inputOutputGUI();
 		
 		// Creating Search Bar GUI
 		JLabel searchLabel = new JLabel("Search Bar:");
@@ -82,8 +94,17 @@ public class Panel {
 		
 		f.add(returnArea);
 		
+		searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				IandO.printToResults(resultTestList, returnArea);
+			}
+		});
+		
 		f.setSize(1000,680);
 		f.setLayout(null);
 		f.setVisible(true);
 	}
+	
+	
+	
 }

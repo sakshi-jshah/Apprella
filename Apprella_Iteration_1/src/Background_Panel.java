@@ -1,7 +1,9 @@
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
+import javax.swing.JTextArea;
 
 public class Background_Panel extends JComponent {
 	private Image image;
@@ -15,5 +17,5 @@ public class Background_Panel extends JComponent {
 		super.paintComponent(g);
 		g.drawImage(image, 0, 0, this);
 	}
-	
+
 }
