@@ -1,141 +1,141 @@
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class ApplicationTest {
+class ApplicationTest {
 
 	@Test
-	public void testApplicationStringStringStringStringStringStringIntDoubleDoubleDoubleBoolean() {
+	void testApplicationStringStringStringStringStringStringIntDoubleDoubleDoubleBoolean() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testApplicationApplication() {
+	void testApplicationApplication() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testApplication() {
+	void testApplication() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testApplicationRandomAccessFile() {
+	void testApplicationRandomAccessFile() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testToString() {
+	void testToString() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetAppName() {
+	void testGetAppName() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetAppName() {
+	void testSetAppName() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetAppUID() {
+	void testGetAppUID() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetAppUID() {
+	void testSetAppUID() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetCategory() {
+	void testGetCategory() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetCategory() {
+	void testSetCategory() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetVersion() {
+	void testGetVersion() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetVersion() {
+	void testSetVersion() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetLanguage() {
+	void testGetLanguage() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetLanguage() {
+	void testSetLanguage() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetPublishDate() {
+	void testGetPublishDate() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetPublishDate() {
+	void testSetPublishDate() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetRecommendAge() {
+	void testGetRecommendAge() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetRecommendAge() {
+	void testSetRecommendAge() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetPrice() {
+	void testGetPrice() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetPrice() {
+	void testSetPrice() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetRating() {
+	void testGetRating() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetRating() {
+	void testSetRating() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetSize() {
+	void testGetSize() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetSize() {
+	void testSetSize() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testIsCompatibility() {
+	void testIsCompatibility() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSetCompatibility() {
+	void testSetCompatibility() {
 		fail("Not yet implemented");
 	}
 

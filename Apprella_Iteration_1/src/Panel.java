@@ -104,9 +104,12 @@ public class Panel {
 		
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//IandO.printToResults(resultTestList, returnArea);
 				String text = search.getText();
-				IandO.searchResults(resultTestList, returnArea, text);
+				try {
+					IandO.searchResults(resultTestList, returnArea, text);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		

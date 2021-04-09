@@ -1,16 +1,16 @@
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class inputOutputGUITest {
+class inputOutputGUITest {
 
 	@Test
-	public void testPrintToResults() {
+	void testPrintToResults() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testSearchResults() {
+	void testSearchResults() {
 		fail("Not yet implemented");
 	}
 
