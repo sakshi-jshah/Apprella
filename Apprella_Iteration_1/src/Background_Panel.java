@@ -18,4 +18,14 @@ public class Background_Panel extends JComponent {
 		g.drawImage(image, 0, 0, this);
 	}
 
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
+	
+
 }

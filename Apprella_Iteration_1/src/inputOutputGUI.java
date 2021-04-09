@@ -10,13 +10,9 @@ public class inputOutputGUI {
 	 * @param textArea
 	 * @throws Exception 
 	 */
-	public void printToResults(ArrayList<String> list, JTextArea textArea) throws Exception {
-		if(!list.isEmpty()) {
-			for (String element : list) {
-				textArea.append(element + "\n");
-			}
-		} else {
-			throw new Exception("List is empty");
+	public void printToResults(ArrayList<String> list, JTextArea textArea) {
+		for (String element : list) {
+			textArea.append(element + "\n");
 		}
 	}
 	
@@ -28,18 +24,14 @@ public class inputOutputGUI {
 	 * @param str
 	 * @throws Exception 
 	 */
-	public void searchResults(ArrayList<String>list, JTextArea textArea, String str) throws Exception
+	public void searchResults(ArrayList<String>list, JTextArea textArea, String str) 
 	{
-		if(!list.isEmpty()) {
-			for (String element : list)
+		for (String element : list)
+		{
+			if(element.contains(str) || str.equals(element))
 			{
-				if(element.contains(str) || str.equals(element))
-				{
-					textArea.append(element + "\n");
-				}
+				textArea.append(element + "\n");
 			}
-		} else {
-			throw new Exception("List is empty");
 		}
 	}
 }
