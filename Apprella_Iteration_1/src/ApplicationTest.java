@@ -2,189 +2,133 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import junit.framework.Assert;
+
 class ApplicationTest {
 
+	private static Application app1 = new Application(
+			"Apprella", "APRT1", "Search", "Eng", "04/08/2021",
+			1, 10, 0.00, 5.00, 2.89, true
+			);
+	
+	private static Application app2 = new Application(app1);
+	private static Application app3 = new Application(app1);
+	
 	@Test
-	void testApplicationStringStringStringStringStringStringIntDoubleDoubleDoubleBoolean() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {
-		};
-		assertEquals("Among Us", a.getAppName());
-		assertEquals("1234", a.getAppUID());
-		assertEquals("Game", a.getCategory());
-		assertEquals("1.0", a.getVersion());
-		assertEquals("English", a.getLanguage());
-		assertEquals("May 15, 2021", a.getPublishDate());
-		assertEquals(12, a.getRecommendAge());
-		assertEquals(0.0, a.getPrice());
-		assertEquals(5.0, a.getRating());
-		assertEquals(3.1, a.getSize());
-		assertFalse(a.isCompatibility());
+	void testApplication() {
+		assertEquals("Apprella", 	app1.getAppName());
+		assertEquals("APRT1", 	    app1.getAppUID());
+		assertEquals("Search", 	    app1.getCategory());
+		assertEquals("Eng", 	    app1.getLanguage());
+		assertEquals("04/08/2021",  app1.getPublishDate());
+		assertEquals(1, 	app1.getVersion());
+		assertEquals(10, 	app1.getRecommendAge());
+		assertEquals(0.00,  app1.getPrice());
+		assertEquals(5.00,  app1.getRating());
+		assertEquals(2.89,  app1.getSize());
+		assertTrue(app1.isCompatibility());
 	}
 
 	@Test
-	void testApplicationApplication() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		Application b = new Application(a) {};
-		assertEquals("Among Us", b.getAppName());
-		assertEquals("1234", b.getAppUID());
-		assertEquals("Game", b.getCategory());
-		assertEquals("1.0", b.getVersion());
-		assertEquals("English", b.getLanguage());
-		assertEquals("May 15, 2021", b.getPublishDate());
-		assertEquals(12, b.getRecommendAge());
-		assertEquals(0.0, b.getPrice());
-		assertEquals(5.0, b.getRating());
-		assertEquals(3.1, b.getSize());
-		assertFalse(b.isCompatibility());
+	void testUpdateVersion() {
+		app2.updateVersion();
+		assertEquals(2, 	app2.getVersion());
 	}
-
-
+	
 	@Test
-	void testToString() {
-		fail("Not yet implemented");
+	void testCheckVersion() {
+		assertEquals(2, 	app2.getVersion());
 	}
-
+	
 	@Test
-	void testGetAppName() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals("Among Us", a.getAppName());
+	void testPrice() {
+		// Add Price
+		app2.addPrice(8.88);
+		assertEquals(8.88,  app2.getPrice());
+		// Reduce Price
+		app2.reducePrice(2.22);
+		assertEquals(6.66,  app2.getPrice());
 	}
-
+	
 	@Test
 	void testSetAppName() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setAppName("Minecraft");
-		assertEquals("Minecraft", a.getAppName());
+		app3.setAppName("CANVAS");
+		assertEquals("CANVAS",  app3.getAppName());
 	}
-
-	@Test
-	void testGetAppUID() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals("1234", a.getAppUID());
-	}
-
+	
 	@Test
 	void testSetAppUID() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setAppUID("12345");
-		assertEquals("12345", a.getAppUID());
+		app3.setAppUID("JUNIT");
+		assertEquals("JUNIT",  app3.getAppUID());
 	}
-
-	@Test
-	void testGetCategory() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals("Game", a.getCategory());
-	}
-
+	
 	@Test
 	void testSetCategory() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setCategory("Action");
-		assertEquals("Action", a.getCategory());
+		app3.setCategory("Media");
+		assertEquals("Media",  app3.getCategory());
 	}
-
-	@Test
-	void testGetVersion() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals("1.0", a.getVersion());
-	}
-
-	@Test
-	void testSetVersion() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setVersion("2.5");
-		assertEquals("2.5", a.getVersion());
-	}
-
-	@Test
-	void testGetLanguage() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals("English", a.getLanguage());
-	}
-
+	
 	@Test
 	void testSetLanguage() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setLanguage("French");
-		assertEquals("French", a.getLanguage());
+		app3.setLanguage("Chinese");
+		assertEquals("Chinese",  app3.getLanguage());
 	}
-
-	@Test
-	void testGetPublishDate() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals("May 15, 2021", a.getPublishDate());
-	}
-
+	
 	@Test
 	void testSetPublishDate() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setPublishDate("April 1, 2021");
-		assertEquals("April 1, 2021", a.getPublishDate());
+		app3.setPublishDate("01/01/1111");
+		assertEquals("01/01/1111",  app3.getPublishDate());
 	}
-
+	
 	@Test
-	void testGetRecommendAge() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals(12, a.getRecommendAge());
+	void testSetVersion() {
+		app3.setVersion(6);
+		assertEquals(6,  app3.getVersion());
 	}
-
+	
 	@Test
-	void testSetRecommendAge() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setRecommendAge(5);
-		assertEquals(5, a.getRecommendAge());
+	void testSetRecAge() {
+		app3.setRecommendAge(18);
+		assertEquals(18,  app3.getRecommendAge());
 	}
-
-	@Test
-	void testGetPrice() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals(0.0, a.getPrice());
-	}
-
+	
 	@Test
 	void testSetPrice() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setPrice(2.99);
-		assertEquals(2.99, a.getPrice());
+		app3.setPrice(4.56);
+		assertEquals(4.56,  app3.getPrice());
 	}
-
-	@Test
-	void testGetRating() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals(5.0, a.getRating());
-	}
-
+	
 	@Test
 	void testSetRating() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setRating(0.0);
-		assertEquals(0.0, a.getRating());
+		app3.setRating(3);
+		assertEquals(3,  app3.getRating());
 	}
-
-	@Test
-	void testGetSize() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertEquals(3.1, a.getSize());
-	}
-
+	
 	@Test
 	void testSetSize() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setSize(5.9);
-		assertEquals(5.9, a.getSize());
+		app3.setSize(7.34);
+		assertEquals(7.34,  app3.getSize());
 	}
-
-	@Test
-	void testIsCompatibility() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		assertFalse(a.isCompatibility());
-	}
-
+	
 	@Test
 	void testSetCompatibility() {
-		Application a = new Application("Among Us", "1234", "Game", "1.0", "English", "May 15, 2021", 12, 0.0, 5.0, 3.1, false) {};
-		a.setCompatibility(true);
-		assertTrue(a.isCompatibility());
+		app3.setCompatibility(false);
+		assertFalse(app3.isCompatibility());
 	}
-
+	
+//	@Test
+//	void testSetDiscountPrice() {
+//		
+//	}
+//	
+//	@Test
+//	void testCheckDiscountPrice() {
+//		
+//	}
+	
 }
+
+// "Apprella", "APRT1", "Search", "Eng", "04/08/2021",
+// 1, 10, 0.00, 5.00, 2.89, true
+
+
