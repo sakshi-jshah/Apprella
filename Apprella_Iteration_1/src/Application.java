@@ -1,31 +1,35 @@
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
+import java.security.InvalidParameterException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
-public abstract class Application {
+public class Application {
 	//=========================
 	private String appName;
 	private String appUID;
 	private String category;
-	private String version;
 	private String language;
 	private String publishDate;
+	private int version;
 	private int recommendAge;
 	private double price;
 	private double rating;
 	private double size;
 	private boolean Compatibility;  // Able to run on Android
 	
+	private double discPrice;
+	private static DecimalFormat df2 = new DecimalFormat("#.##");
 	
 	//=========================
-	public Application(String appName, String appUID, String category, String version, String language,
-			String publishDate, int recommendAge, double price, double rating, double size, boolean compatibility) {
+	public Application(String appName, String appUID, String category, String language, String publishDate,
+			int version, int recommendAge, double price, double rating, double size, boolean compatibility) {
 		super();
 		setAppName(appName);
 		setAppUID(appUID);
 		setCategory(category);
-		setVersion(version);
 		setLanguage(language);
 		setPublishDate(publishDate);
+		setVersion(version);
 		setRecommendAge(recommendAge);
 		setPrice(price);
 		setRating(rating);
@@ -34,9 +38,10 @@ public abstract class Application {
 	}
 
 	public Application(Application app) {
-		this(app.appName, app.appUID, app.category, app.version, app.language,
-			 app.publishDate, app.recommendAge, app.price, app.rating, 
-			 app.size, app.Compatibility);
+		this(app.appName, 		app.appUID, 		app.category, 
+			 app.language, 		app.publishDate,    app.version,
+			 app.recommendAge,  app.price, 			app.rating, 
+			 app.size, 			app.Compatibility);
 	}
 	
 	public Application() {
@@ -58,146 +63,142 @@ public abstract class Application {
 //		return new Application(this);
 //	}
 	
+	public void updateVersion() {
+		version += 1;
+	}
+	
+	
+	public String checkVersion() {
+		return "Current Version: " + version;
+	}
+	
+	
+	public void addPrice(double ap) {
+		if(ap > (100 - price)) {
+			throw new InvalidParameterException("Invalid number to Add!");
+		}
+		price = price + ap;
+	}
+	
+	
+	public void reducePrice(double ap) {
+		if(ap > price) {
+			throw new InvalidParameterException("Invalid number to reduce!");
+		}
+		price = price - ap;
+	}
+	
+
+//	public void setDiscountPrice(double numDisc) {
+//		discPrice = price * numDisc;
+//	}
+//	
+//	
+//	public void checkDiscountPrice() {
+//		System.out.println("Price with discount: " + df2.format(discPrice));
+//	}
+	
+	
+	public void checkCompatibility() {
+		if (Compatibility == true) {
+			System.out.print("Avalible on Android!");
+		} else {
+			System.out.print("Not avalible on Android!");
+		}
+	}
+	
 	
 	@Override
 	public String toString() {
-		return "Application [appName=" + appName + ", appUID=" + appUID + ", category=" + category + ", version="
-				+ version + ", language=" + language + ", publishDate=" + publishDate + ", recommendAge=" + recommendAge
-				+ ", price=" + price + ", rating=" + rating + ", size=" + size + ", Compatibility=" + Compatibility
-				+ "]";
+		return "Application:" + appName 
+				+ "; Category=" + category 
+				+ "; version=" + version 
+				+ "; language=" + language 
+				+ "; recommendAge=" + recommendAge
+				+ "; price=" + price 
+				+ "; rating=" + rating 
+				+ "; Compatibility=" + Compatibility;
 	}
 	
 	
 	//=========================
-	public String getAppName() {
-		return appName;
-	}
+	public String getAppName() 			{ return appName;		}
 
-
+	public String getAppUID() 			{ return appUID; 		}
+	
+	public String getCategory() 		{ return category; 		}
+	
+	public String getLanguage() 		{ return language; 		}
+	
+	public String getPublishDate() 		{ return publishDate;	}
+	
+	public int getVersion() 			{ return version; 		}
+	
+	public int getRecommendAge() 		{ return recommendAge; 	}
+	
+	public double getPrice() 			{ return price; 		}
+	
+	public double getRating() 			{ return rating; 		}
+	
+	public double getSize() 			{ return size; 			}
+	
+	public boolean isCompatibility() 	{ return Compatibility; }
+	
 
 	public void setAppName(String appName) {
 		this.appName = appName;
 	}
 
-
-
-	public String getAppUID() {
-		return appUID;
-	}
-
-
-
 	public void setAppUID(String appUID) {
 		this.appUID = appUID;
 	}
-
-
-
-	public String getCategory() {
-		return category;
-	}
-
-
 
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
-
-
-	public String getVersion() {
-		return version;
-	}
-
-
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-
-
-
-	public String getLanguage() {
-		return language;
-	}
-
-
-
 	public void setLanguage(String language) {
 		this.language = language;
 	}
 
-
-
-	public String getPublishDate() {
-		return publishDate;
-	}
-
-
-
 	public void setPublishDate(String publishDate) {
 		this.publishDate = publishDate;
 	}
-
-
-
-	public int getRecommendAge() {
-		return recommendAge;
+	
+	public void setVersion(int version) {
+		this.version = version;
 	}
-
-
-
+	
 	public void setRecommendAge(int recommendAge) {
+		if(recommendAge < 0 || recommendAge > 18) {
+			throw new InvalidParameterException("Recommand age must be between 0 and 21");
+		}
 		this.recommendAge = recommendAge;
 	}
 
-
-
-	public double getPrice() {
-		return price;
-	}
-
-
-
 	public void setPrice(double price) {
+		if(price < 0 || price > 100) {
+			throw new InvalidParameterException("Avaliable price must be between 0 $ and 100 $");
+		}
 		this.price = price;
 	}
 
-
-
-	public double getRating() {
-		return rating;
-	}
-
-
-
 	public void setRating(double rating) {
+		if(rating < 0 || rating > 5) {
+			throw new InvalidParameterException("Application can only be rated from 0 to 5");
+		}
 		this.rating = rating;
 	}
 
-
-
-	public double getSize() {
-		return size;
-	}
-
-
-
 	public void setSize(double size) {
+		if(size < 0 || size > 10) {
+			throw new InvalidParameterException("Application can only have minimum size of 0 GB and maximum of 10 GB");
+		}
 		this.size = size;
 	}
-
-
-
-	public boolean isCompatibility() {
-		return Compatibility;
-	}
-
-
 
 	public void setCompatibility(boolean compatibility) {
 		Compatibility = compatibility;
 	}
-	
 	
 }
