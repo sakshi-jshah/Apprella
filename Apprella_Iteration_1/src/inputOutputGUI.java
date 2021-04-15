@@ -1,9 +1,14 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JTextArea;
 
 public class inputOutputGUI {
 
+	HashMap<String, String> users;
+	public inputOutputGUI() {
+		users.put("trello_1", "0123456789");
+	}
 	/**
 	 * Will eventually be the element's toString() method
 	 * @param list
@@ -33,5 +38,18 @@ public class inputOutputGUI {
 				textArea.append(element + "\n");
 			}
 		}
+	}
+	
+	
+	public boolean checkUser(String username, String password) {
+		
+		System.out.println(users.get(username));
+		if (users.containsKey(username)) {
+			if (users.get(username) == password) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
