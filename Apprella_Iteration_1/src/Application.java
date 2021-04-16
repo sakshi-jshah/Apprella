@@ -17,7 +17,6 @@ public class Application {
 	private double size;
 	private boolean Compatibility;  // Able to run on Android
 	
-	private double discPrice;
 	private static DecimalFormat df2 = new DecimalFormat("#.##");
 	
 	//=========================
@@ -44,24 +43,31 @@ public class Application {
 			 app.size, 			app.Compatibility);
 	}
 	
-	public Application() {
-		
-	}
 	
 	public Application(RandomAccessFile raf) throws Exception {
-		load(raf);
+		this(raf.readLine());
 	}
+	
+
+	public Application(String row) {
+		this(row.split("\t"));
+	}
+	
+	public Application(String[] p) {
+		this(p[0], p[1], p[2], p[3], p[4],
+			 Integer.parseInt(p[5]), Integer.parseInt(p[6]),
+			 Double.parseDouble(p[7]), Double.parseDouble(p[8]), Double.parseDouble(p[9]),
+			 Boolean.parseBoolean(p[10]));
+	}
+	
 
 
 	//=========================
-	private void load(RandomAccessFile raf) {
-		
+	@Override
+	protected Object clone() {
+		return new Application(this);
 	}
-	
-//	@Override
-//	protected Object clone() {
-//		return new Application(this);
-//	}
+
 	
 	public void updateVersion() {
 		version += 1;
@@ -87,16 +93,6 @@ public class Application {
 		}
 		price = price - ap;
 	}
-	
-
-//	public void setDiscountPrice(double numDisc) {
-//		discPrice = price * numDisc;
-//	}
-//	
-//	
-//	public void checkDiscountPrice() {
-//		System.out.println("Price with discount: " + df2.format(discPrice));
-//	}
 	
 	
 	public void checkCompatibility() {
