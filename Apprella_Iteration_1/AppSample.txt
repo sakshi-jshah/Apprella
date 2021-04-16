@@ -1,0 +1,8 @@
+appName	appUID	category	language	publishDate	version	recommendAge	price	rating	size	Compatibility
+SAA	TESTA	Media	Eng	01/01/1999	1	10	4.3	4.9	5.7	true
+SAB	TESTB	Tech	Eng	01/01/2000	2	15	5.5	3.2	6.6	true
+SAC	TESTC	Game	Eng	01/01/2010	3	2	2.5	2.6	8.8	true
+SAD	TESTD	Media	Eng	01/01/2020	4	5	7.4	4.7	9.9	false
+SAE	TESTE	Media	Eng	01/01/2120	5	6	7.4	4.7	3.3	false
+SAF	TESTF	Media	Eng	01/01/2220	6	11	7.4	4.7	2.2	false
+SAG	TESTG	Media	Eng	01/01/2420	7	12	7.4	4.7	1.1	false
