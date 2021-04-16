@@ -104,11 +104,6 @@
             <classpath refid="run.Panel.classpath"/>
         </java>
     </target>
-    <target name="SearchBar">
-        <java classname="SearchBar" failonerror="true" fork="yes">
-            <classpath refid="run.SearchBar.classpath"/>
-        </java>
-    </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">
             <fileset dir="${junit.output.dir}">
