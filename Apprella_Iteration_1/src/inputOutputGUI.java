@@ -5,8 +5,9 @@ import javax.swing.JTextArea;
 
 public class inputOutputGUI {
 
-	HashMap<String, String> users;
+	private HashMap<String, String> users;
 	public inputOutputGUI() {
+		users = new HashMap<String, String>();
 		users.put("trello_1", "0123456789");
 	}
 	/**
