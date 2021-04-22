@@ -15,7 +15,7 @@ import org.w3c.dom.events.Event;
 
 
 public class Panel {
-	
+	private static int loggedIn;
 	
 	public static void main(String args[]) throws IOException {
 		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education"};
@@ -109,6 +109,37 @@ public class Panel {
 			}
 		});
 		
+		/*
+		 * Adding the ability to login
+		 */
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JPanel tempPanel = new JPanel();
+				JTextField usernameField = new JTextField(10);
+			    JTextField passwordField = new JTextField(10);
+				tempPanel.add(new JLabel("Username:"));
+			    tempPanel.add(usernameField);
+			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(new JLabel("Password:"));
+			    tempPanel.add(passwordField);
+				int good = JOptionPane.showConfirmDialog(null, tempPanel, "Enter username: ", JOptionPane.OK_CANCEL_OPTION);
+				String username = usernameField.getText();
+				String password = passwordField.getText();
+				System.out.println(username);
+				System.out.println(password);
+
+				if (IandO.checkUser(username, password) == 0) {
+					JOptionPane.showMessageDialog(f, "Successful Login");
+					loggedIn = 0;
+				} else if (IandO.checkUser(username, password) == 1){
+					JOptionPane.showMessageDialog(f, "In-Successful Login");
+					loggedIn = 1;
+				} else {
+					JOptionPane.showMessageDialog(f, "Administrative Login Successful");
+					loggedIn = 2;
+				}
+			}
+		});
 		
 		
 		f.setSize(1000,680);

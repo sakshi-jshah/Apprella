@@ -42,15 +42,17 @@ public class inputOutputGUI {
 	}
 	
 	
-	public boolean checkUser(String username, String password) {
+	public int checkUser(String username, String password) {
 		
-		System.out.println(users.get(username));
+		System.out.println(users.get(username) + " == " + password);
 		if (users.containsKey(username)) {
-			if (users.get(username) == password) {
-				return true;
+			String tempPassword = users.get(username);
+			System.out.println(tempPassword == password);
+			if (tempPassword.equals(password)) {
+				return 0;
 			}
 		}
 		
-		return false;
+		return 1;
 	}
 }
