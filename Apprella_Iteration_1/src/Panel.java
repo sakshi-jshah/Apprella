@@ -132,7 +132,7 @@ public class Panel {
 					JOptionPane.showMessageDialog(f, "Successful Login");
 					loggedIn = 0;
 				} else if (IandO.checkUser(username, password) == 1){
-					JOptionPane.showMessageDialog(f, "In-Successful Login");
+					JOptionPane.showMessageDialog(f, "Unsuccessful Login");
 					loggedIn = 1;
 				} else {
 					JOptionPane.showMessageDialog(f, "Administrative Login Successful");
