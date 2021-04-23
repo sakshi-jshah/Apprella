@@ -25,6 +25,7 @@
         <pathelement location="../../../.p2/pool/plugins/org.junit_4.13.0.v20200204-1500.jar"/>
         <pathelement location="../../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
     </path>
+    <echo message = "JUnit added" />
     <path id="Apprella_Iteration_1.classpath">
         <pathelement location="bin"/>
         <path refid="JUnit 5.libraryclasspath"/>
@@ -49,6 +50,7 @@
         <path refid="Apprella_Iteration_1.classpath"/>
         <path refid="JUnit 5.libraryclasspath"/>
     </path>
+    <echo message = "Class Paths addded" />
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
