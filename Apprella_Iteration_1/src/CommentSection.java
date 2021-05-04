@@ -1,5 +1,9 @@
+import java.util.Iterator;
+import java.util.Vector;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 class CommentSection {
 	public static void main(String args[]) {
@@ -29,6 +33,32 @@ class CommentSection {
 		panel.add(reset);
 
 		JTextArea textA = new JTextArea();
+
+		Vector<String> store = new Vector<String>();
+		send.addActionListener((ActionListener) new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (!textF.getText().isEmpty()) {
+					store.add(textF.getText());
+				}
+				textA.selectAll();
+				textA.replaceSelection("");
+				Iterator<String> value = store.iterator();
+				while (value.hasNext()) {
+					textA.append(value.next() + "\n");
+				}
+				textF.setText("");}});
+		reset.addActionListener((ActionListener) new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (store.size() > 0) {
+					store.remove(store.size() - 1);
+				}
+				textA.selectAll();
+				textA.replaceSelection("");
+				Iterator<String> value = store.iterator();
+				while (value.hasNext()) {
+					textA.append(value.next() + "\n");}}});
 
 		frame.getContentPane().add(BorderLayout.SOUTH, panel);
 		frame.getContentPane().add(BorderLayout.NORTH, menuB);
