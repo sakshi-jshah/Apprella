@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,19 +19,20 @@ import org.w3c.dom.events.Event;
 public class Panel {
 	private static int loggedIn;
 	
-	private ArrayList<Application> app;
+	private static ArrayList<Application> app;
 	
 	public static void main(String args[]) throws IOException {
-		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education"};
+		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education", "Music"};
 		String[] priceList = { "...", "Free", "$0.99+", "$1.99+", "$2.99+", "$3.99+"};
 		String[] ratingList = { "...", "Highet Rating", "Lowest Rating"};
 		ArrayList<Application> outstandingList = new ArrayList<Application>();
 		
+		loadApp();
 		
 		
 		Application app1 = new Application("fun1", "000232", "Tech", "English", "08-21-2020", 1, 10, 0.99, 4.3, 2.99, true);
 		outstandingList.add(app1);
-		
+
 		// Temp list of elements to test printing
 		ArrayList<String> resultTestList = new ArrayList<>();
 		resultTestList.add("Among Us");
@@ -120,6 +122,7 @@ public class Panel {
 		f.add(addButton);
 		f.add(addLabel);
 		
+		
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JPanel tempPanel = new JPanel();
@@ -192,6 +195,16 @@ public class Panel {
 		});
 		
 		
+		sortButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<String> results = null;
+				if (genre.getSelectedItem().toString() != "...") {
+					results = sortByType(genre);
+				}
+				IandO.printToResults(results, returnArea);
+			}
+		});
+		
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text = search.getText();
@@ -214,7 +227,7 @@ public class Panel {
 			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
 			    tempPanel.add(new JLabel("Password:"));
 			    tempPanel.add(passwordField);
-				int good = JOptionPane.showConfirmDialog(null, tempPanel, "Enter username: ", JOptionPane.OK_CANCEL_OPTION);
+				int good = JOptionPane.showConfirmDialog(null, tempPanel, "Enter Login Credentials: ", JOptionPane.OK_CANCEL_OPTION);
 				String username = usernameField.getText();
 				String password = passwordField.getText();
 				System.out.println(username);
@@ -281,10 +294,10 @@ public class Panel {
 
 
 						if (nameList.contains(appname)) {
-							JOptionPane.showMessageDialog(f, "Successful Addition");
+							JOptionPane.showMessageDialog(tempPanel, "Successful Addition");
 							// Add app to list
 						} else {
-							JOptionPane.showMessageDialog(f, "Unsuccessful Addition");
+							JOptionPane.showMessageDialog(tempPanel, "Unsuccessful Addition");
 						}
 						outstandingFrame.setVisible(false);
 						IandO.printToResults(tempList, outstandingArea);
@@ -310,7 +323,7 @@ public class Panel {
 
 
 						if (nameList.contains(appname)) {
-							JOptionPane.showMessageDialog(f, "Successful Deletion");
+							JOptionPane.showMessageDialog(tempPanel, "Successful Deletion");
 							// remove app from outstanding list
 							int loc = nameList.indexOf(appname);
 							tempList.remove(loc);
@@ -319,7 +332,7 @@ public class Panel {
 							outstandingArea.setText("");
 							
 						} else {
-							JOptionPane.showMessageDialog(f, "Unsuccessful Deletion");
+							JOptionPane.showMessageDialog(tempPanel, "Unsuccessful Deletion");
 						}
 						
 						outstandingFrame.setVisible(false);
@@ -346,13 +359,13 @@ public class Panel {
 		
 	}
 	
-	private void loadApp() {
+	private static void loadApp() {
 		
 		RandomAccessFile raf = null;
 		
 		try {
 			app = new ArrayList<Application>();
-			raf = new RandomAccessFile("AppSample.txt", "r");
+			raf = new RandomAccessFile("appIO.txt", "r");
 			raf.readLine();
 			while (raf.getFilePointer() < raf.length()) {
 				Application a = new Application(raf);
@@ -364,10 +377,38 @@ public class Panel {
 //				System.out.println(a);
 			
 		} catch (Exception e) {
-			System.out.println("Error with raf");
+			System.out.println("Error with raf " + e);
 		} finally {
 			try { raf.close(); } catch (Exception e) {}
 		}
+	}
+	
+	private ArrayList<String> sortByPrice(JComboBox genre) {
+		double readin = Double.parseDouble(genre.getSelectedItem().toString());
+		String readout;
+		
+		ArrayList<String> result = new ArrayList<String>();
+		
+		for (Application a : app) {
+			if (readin >= a.getPrice()) {
+				result.add(a.getAppName());
+			}
+		}
+		return result;
+	}
+
+
+	private static ArrayList<String> sortByType(JComboBox genre) {
+		String ret = genre.getSelectedItem().toString();
+		
+		ArrayList<String> result = new ArrayList<String>();
+		
+		for (Application a : app) {
+			if (ret.equals(a.getCategory())) {
+				result.add(a.getAppName());
+			}
+		}
+		return result;
 	}
 	
 }
