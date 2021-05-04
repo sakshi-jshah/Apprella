@@ -21,6 +21,10 @@ public class Panel {
 		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education"};
 		String[] priceList = { "...", "Free", "$0.99+", "$1.99+", "$2.99+", "$3.99+"};
 		String[] ratingList = { "...", "Highet Rating", "Lowest Rating"};
+		ArrayList<Application> outstandingList = new ArrayList<Application>();
+		
+		Application app1 = new Application("fun1", "000232", "Tech", "English", "08-21-2020", 1, 10, 0.99, 4.3, 2.99, true);
+		outstandingList.add(app1);
 		
 		// Temp list of elements to test printing
 		ArrayList<String> resultTestList = new ArrayList<>();
@@ -108,6 +112,8 @@ public class Panel {
 				IandO.searchResults(resultTestList, returnArea, text);
 			}
 		});
+		JButton outStandingList = new JButton("Oustanding Requests");
+		outStandingList.setBounds(640, 450, 200, 20);
 		
 		/*
 		 * Adding the ability to login
@@ -129,22 +135,89 @@ public class Panel {
 				System.out.println(password);
 
 				if (IandO.checkUser(username, password) == 0) {
-					JOptionPane.showMessageDialog(f, "Successful Login");
+					JOptionPane.showMessageDialog(f, "unsuccessful Login");
 					loggedIn = 0;
 				} else if (IandO.checkUser(username, password) == 1){
-					JOptionPane.showMessageDialog(f, "Unsuccessful Login");
+					JOptionPane.showMessageDialog(f, "Successful Login");
 					loggedIn = 1;
-				} else {
-					JOptionPane.showMessageDialog(f, "Administrative Login Successful");
+				} else if (IandO.checkUser(username, password) == 2){
+					JOptionPane.showMessageDialog(f, "Moderator Login Successful");
 					loggedIn = 2;
+				} else {
+					JOptionPane.showMessageDialog(f, "Administrator Login Successful");
+					loggedIn = 3;
+					f.setVisible(false);
+					f.add(outStandingList);
+					f.setVisible(true);
 				}
 			}
 		});
 		
+		outStandingList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame outstandingFrame = new JFrame();
+				outstandingFrame.setContentPane(new Background_Panel(backgroundImage));
+
+				ArrayList<String> tempList = new ArrayList<String>();
+				
+				for (Application app : outstandingList) {
+					tempList.add(app.toString());
+				}
+				
+				ArrayList<String> nameList = new ArrayList<String>();
+				
+				for (Application app : outstandingList) {
+					nameList.add(app.getAppName());
+				}
+				
+				
+				JLabel outstandingLabel = new JLabel("List of Applications:");
+				outstandingLabel.setForeground(Color.white);
+				outstandingLabel.setBounds(20, 20, 600, 20);
+				
+				JTextArea outstandingArea = new JTextArea();
+				outstandingArea.setBounds(20, 50, 750, 300);
+				IandO.printToResults(tempList, outstandingArea);
+				
+				JButton approveButton = new JButton("Approve");
+				approveButton.setBounds(20, 440, 100, 20);
+				outstandingFrame.add(approveButton);
+
+				approveButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JPanel tempPanel = new JPanel();
+						JTextField appnameField = new JTextField(10);
+						tempPanel.add(new JLabel("App Name"));
+					    tempPanel.add(appnameField);
+
+						int good = JOptionPane.showConfirmDialog(null, tempPanel, "Enter appname: ", JOptionPane.OK_CANCEL_OPTION);
+						String appname = appnameField.getText();
+
+
+						if (nameList.contains(appname)) {
+							JOptionPane.showMessageDialog(f, "Successful Addition");
+							// Add app to list
+						} else {
+							JOptionPane.showMessageDialog(f, "Unsuccessful Addition");
+						}
+					}
+				});
+				
+				
+				outstandingFrame.add(outstandingLabel);
+				outstandingFrame.add(outstandingArea);
+				outstandingFrame.setSize(800,520);
+				outstandingFrame.setLayout(null);
+				outstandingFrame.setVisible(true);
+			}
+		});
 		
+		System.out.println(loggedIn);
 		f.setSize(1000,680);
 		f.setLayout(null);
 		f.setVisible(true);
+		
+		
 	}
 	
 	
