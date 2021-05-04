@@ -9,12 +9,12 @@ class CommentSection {
 		frame.setSize(400, 400);
 
 		JMenuBar menuB = new JMenuBar();
-		JMenu menuB1 = new JMenu("FILE");
+		JMenu menuB1 = new JMenu("Go back");
 		JMenu menuB2 = new JMenu("Help");
 		menuB.add(menuB1);
 		menuB.add(menuB2);
-		JMenuItem menuB11 = new JMenuItem("Open");
-		JMenuItem menuB22 = new JMenuItem("Save as");
+		JMenuItem menuB11 = new JMenuItem("Yes");
+		JMenuItem menuB22 = new JMenuItem("Open");
 		menuB1.add(menuB11);
 		menuB2.add(menuB22);
 
