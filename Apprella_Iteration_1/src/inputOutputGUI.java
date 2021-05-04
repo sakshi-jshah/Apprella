@@ -12,6 +12,7 @@ public class inputOutputGUI {
 	public inputOutputGUI() {
 		users = new HashMap<String, String>();
 		users.put("trello_1", "0123456789");
+		moderators = new HashMap<String, String>();
 		administrators = new HashMap<String, String>();
 		administrators.put("admin", "password");
 	}

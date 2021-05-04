@@ -187,7 +187,7 @@ public class Application {
 	}
 
 	public void setSize(double size) {
-		if(size < 0 || size > 10) {
+		if(size < 0 || size > 500) {
 			throw new InvalidParameterException("Application can only have minimum size of 0 GB and maximum of 10 GB");
 		}
 		this.size = size;

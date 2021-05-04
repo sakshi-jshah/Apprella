@@ -1,3 +1,0 @@
-appName	appUID	category	language	publishDate	version	recommendAge	price	rating	size	compatibility
-Instagram	0001	Social Media Networking	N/A	October 6, 2010	N/A	13	Free	5	32 MB	All
-Spotify	0002	Music	N/A	October 7, 2008 N/A	13	Free	4	108 MB	All

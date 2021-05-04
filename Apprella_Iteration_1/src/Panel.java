@@ -22,7 +22,7 @@ public class Panel {
 	private static ArrayList<Application> app;
 	
 	public static void main(String args[]) throws IOException {
-		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education", "Music"};
+		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education", "Music", "Networking"};
 		String[] priceList = { "...", "Free", "$0.99+", "$1.99+", "$2.99+", "$3.99+"};
 		String[] ratingList = { "...", "Highet Rating", "Lowest Rating"};
 		ArrayList<Application> outstandingList = new ArrayList<Application>();
@@ -32,6 +32,7 @@ public class Panel {
 		
 		Application app1 = new Application("fun1", "000232", "Tech", "English", "08-21-2020", 1, 10, 0.99, 4.3, 2.99, true);
 		outstandingList.add(app1);
+		
 
 		// Temp list of elements to test printing
 		ArrayList<String> resultTestList = new ArrayList<>();
@@ -351,7 +352,9 @@ public class Panel {
 			}
 		});
 		
-		System.out.println(loggedIn);
+		for (Application a : app) {
+			System.out.println(a.toString());
+		}
 		f.setSize(1000,680);
 		f.setLayout(null);
 		f.setVisible(true);
@@ -365,7 +368,7 @@ public class Panel {
 		
 		try {
 			app = new ArrayList<Application>();
-			raf = new RandomAccessFile("appIO.txt", "r");
+			raf = new RandomAccessFile("appIO", "r");
 			raf.readLine();
 			while (raf.getFilePointer() < raf.length()) {
 				Application a = new Application(raf);
