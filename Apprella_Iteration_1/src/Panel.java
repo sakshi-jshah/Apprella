@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -17,11 +18,15 @@ import org.w3c.dom.events.Event;
 public class Panel {
 	private static int loggedIn;
 	
+	private ArrayList<Application> app;
+	
 	public static void main(String args[]) throws IOException {
 		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education"};
 		String[] priceList = { "...", "Free", "$0.99+", "$1.99+", "$2.99+", "$3.99+"};
 		String[] ratingList = { "...", "Highet Rating", "Lowest Rating"};
 		ArrayList<Application> outstandingList = new ArrayList<Application>();
+		
+		
 		
 		Application app1 = new Application("fun1", "000232", "Tech", "English", "08-21-2020", 1, 10, 0.99, 4.3, 2.99, true);
 		outstandingList.add(app1);
@@ -105,6 +110,87 @@ public class Panel {
 		f.add(returnLabel);
 		
 		f.add(returnArea);
+		
+		JLabel addLabel = new JLabel("Submit Upload Request");
+		addLabel.setForeground(Color.white);
+		addLabel.setBounds(640, 330, 200, 20);
+		
+		JButton addButton = new JButton("Add");
+		addButton.setBounds(640, 360, 100, 20);
+		f.add(addButton);
+		f.add(addLabel);
+		
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JPanel tempPanel = new JPanel();
+				JTextField appnameField = new JTextField(10);
+			    JTextField appuidField = new JTextField(10);
+				tempPanel.add(new JLabel("App Name:"));
+			    tempPanel.add(appnameField);
+			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(new JLabel("App UID:"));
+			    tempPanel.add(appuidField);
+			    
+			    JTextField categoryField = new JTextField(10);
+			    JTextField languageField = new JTextField(10);
+				tempPanel.add(new JLabel("Category:"));
+			    tempPanel.add(categoryField);
+			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(new JLabel("Language:"));
+			    tempPanel.add(languageField);
+			    
+			    JTextField publishField = new JTextField(10);
+			    JTextField versionField = new JTextField(10);
+				tempPanel.add(new JLabel("Publish:"));
+			    tempPanel.add(publishField);
+			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(new JLabel("Version:"));
+			    tempPanel.add(versionField);
+			    
+			    JTextField ageField = new JTextField(10);
+			    JTextField priceField = new JTextField(10);
+				tempPanel.add(new JLabel("Recommended Age:"));
+			    tempPanel.add(ageField);
+			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(new JLabel("Price:"));
+			    tempPanel.add(priceField);
+			    
+			    JTextField ratingField = new JTextField(10);
+			    JTextField sizeField = new JTextField(10);
+				tempPanel.add(new JLabel("Rating"));
+			    tempPanel.add(ratingField);
+			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(new JLabel("Size:"));
+			    tempPanel.add(sizeField);
+			    
+			    JTextField compatabilityField = new JTextField(10);
+				tempPanel.add(new JLabel("Compatibile with Andriod:"));
+			    tempPanel.add(compatabilityField);
+
+			    
+				int good = JOptionPane.showConfirmDialog(null, tempPanel, "Enter App Data: ", JOptionPane.OK_CANCEL_OPTION);
+				
+				String appName = appnameField.getText();
+				String appUID = appuidField.getText();
+				String appCategory = categoryField.getText();
+				String appLanguage = languageField.getText();
+				String appPublish = publishField.getText();
+				String appVersion = versionField.getText();
+				String appAge = ageField.getText();
+				String appPrice = priceField.getText();
+				String ratingName = ratingField.getText();
+				String appSize = sizeField.getText();
+				String appCompatability = compatabilityField.getText();
+				
+				try {
+				outstandingList.add(new Application(appName, appUID, appCategory, appLanguage, appPublish, Integer.parseInt(appVersion), Integer.parseInt(appAge), Double.parseDouble(appPrice), Double.parseDouble(ratingName), 
+						Double.parseDouble(appSize), Boolean.parseBoolean(appCompatability)));
+				} catch (Exception e1) {
+					System.out.println(e1);
+				}
+			}
+		});
+		
 		
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -200,7 +286,47 @@ public class Panel {
 						} else {
 							JOptionPane.showMessageDialog(f, "Unsuccessful Addition");
 						}
+						outstandingFrame.setVisible(false);
+						IandO.printToResults(tempList, outstandingArea);
+						outstandingFrame.setVisible(true);
+
 					}
+					
+				});
+				
+				JButton removeButton = new JButton("Remove");
+				removeButton.setBounds(140, 440, 100, 20);
+				outstandingFrame.add(removeButton);
+
+				removeButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JPanel tempPanel = new JPanel();
+						JTextField appnameField = new JTextField(10);
+						tempPanel.add(new JLabel("App Name"));
+					    tempPanel.add(appnameField);
+
+						int good = JOptionPane.showConfirmDialog(null, tempPanel, "Enter appname: ", JOptionPane.OK_CANCEL_OPTION);
+						String appname = appnameField.getText();
+
+
+						if (nameList.contains(appname)) {
+							JOptionPane.showMessageDialog(f, "Successful Deletion");
+							// remove app from outstanding list
+							int loc = nameList.indexOf(appname);
+							tempList.remove(loc);
+							nameList.remove(loc);
+							outstandingList.remove(loc);
+							outstandingArea.setText("");
+							
+						} else {
+							JOptionPane.showMessageDialog(f, "Unsuccessful Deletion");
+						}
+						
+						outstandingFrame.setVisible(false);
+						IandO.printToResults(tempList, outstandingArea);
+						outstandingFrame.setVisible(true);
+					}
+					
 				});
 				
 				
@@ -220,5 +346,28 @@ public class Panel {
 		
 	}
 	
+	private void loadApp() {
+		
+		RandomAccessFile raf = null;
+		
+		try {
+			app = new ArrayList<Application>();
+			raf = new RandomAccessFile("AppSample.txt", "r");
+			raf.readLine();
+			while (raf.getFilePointer() < raf.length()) {
+				Application a = new Application(raf);
+				app.add(a);
+			}
+			raf.close();
+			
+//			for (Application a : app)
+//				System.out.println(a);
+			
+		} catch (Exception e) {
+			System.out.println("Error with raf");
+		} finally {
+			try { raf.close(); } catch (Exception e) {}
+		}
+	}
 	
 }
