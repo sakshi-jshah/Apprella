@@ -3,6 +3,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,12 +22,14 @@ public class Panel {
 	private static int loggedIn;
 	
 	private static ArrayList<Application> app;
+	private static ArrayList<Application> tempAdded;
 	
 	public static void main(String args[]) throws IOException {
 		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education", "Music", "Networking"};
 		String[] priceList = { "...", "Free", "$0.99+", "$1.99+", "$2.99+", "$3.99+"};
 		String[] ratingList = { "...", "Highet Rating", "Lowest Rating"};
 		ArrayList<Application> outstandingList = new ArrayList<Application>();
+		ArrayList<Application> tempAdded = new ArrayList<Application>();
 		
 		loadApp();
 		
@@ -186,6 +190,9 @@ public class Panel {
 				String appSize = sizeField.getText();
 				String appCompatability = compatabilityField.getText();
 				
+				System.out.println("" + appName + appUID + appCategory+ appLanguage+ appPublish+ Integer.parseInt(appVersion) + Integer.parseInt(appAge) + Double.parseDouble(appPrice) + Double.parseDouble(ratingName) + 
+						Double.parseDouble(appSize) + Boolean.parseBoolean(appCompatability));
+				
 				try {
 				outstandingList.add(new Application(appName, appUID, appCategory, appLanguage, appPublish, Integer.parseInt(appVersion), Integer.parseInt(appAge), Double.parseDouble(appPrice), Double.parseDouble(ratingName), 
 						Double.parseDouble(appSize), Boolean.parseBoolean(appCompatability)));
@@ -209,7 +216,8 @@ public class Panel {
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String text = search.getText();
-				IandO.searchResults(resultTestList, returnArea, text);
+				int temp = loggedIn;
+				IandO.searchResults(resultTestList, returnArea, text, f, app, temp);
 			}
 		});
 		JButton outStandingList = new JButton("Oustanding Requests");
@@ -293,10 +301,14 @@ public class Panel {
 						int good = JOptionPane.showConfirmDialog(null, tempPanel, "Enter appname: ", JOptionPane.OK_CANCEL_OPTION);
 						String appname = appnameField.getText();
 
-
 						if (nameList.contains(appname)) {
 							JOptionPane.showMessageDialog(tempPanel, "Successful Addition");
-							// Add app to list
+							for (Application a : outstandingList) {
+								if (a.getAppName().equals(appname)) {
+									app.add(a);
+									tempAdded.add(a);
+								}
+							}
 						} else {
 							JOptionPane.showMessageDialog(tempPanel, "Unsuccessful Addition");
 						}
@@ -358,7 +370,58 @@ public class Panel {
 		f.setSize(1000,680);
 		f.setLayout(null);
 		f.setVisible(true);
-		
+		f.addWindowListener(new WindowListener() {
+
+	        @Override
+	        public void windowClosed(WindowEvent e) {
+	            if (JOptionPane.showConfirmDialog(f, "Are you sure you want to quit?", "Confirm exit.", JOptionPane.OK_OPTION, 0, new ImageIcon("")) != 0) {
+	            	return;
+	            }
+	            saveApp();
+	            System.exit(-1);
+	        }
+
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				 if (JOptionPane.showConfirmDialog(f, "Are you sure you want to quit?", "Confirm exit.", JOptionPane.OK_OPTION, 0, new ImageIcon("")) != 0) {
+		            	return;
+		            }
+				 saveApp();
+		         System.exit(-1);
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+	    });
 		
 	}
 	
@@ -412,6 +475,38 @@ public class Panel {
 			}
 		}
 		return result;
+	}
+	
+	
+private static void saveApp() {
+		
+		RandomAccessFile raf = null;
+		
+		try {
+			int i = 0;
+			raf = new RandomAccessFile("appIO", "rw");
+			System.out.println("Created File");
+			System.out.println(raf.getFilePointer());
+			System.out.println(raf.readLine());
+			while (raf.getFilePointer() < raf.length()) {
+				System.out.println(raf.readLine());
+			}
+			System.out.println("Finished Read");
+
+			for (Application a : tempAdded) {
+				System.out.println(a.toString());
+				// raf.writeUTF(a.getAppName() + "\t" + a.getAppUID() + "\t" + a.getCategory() + "\t" + a.getLanguage() + "\t" + a.getPublishDate() + "\t" + a.getVersion() + "\t" + a.getRecommendAge() + "\t" + a.getPrice() + "\t" + a.getRating() + "\t" + a.getSize() + "\t" + a.isCompatibility() + "\n");
+			}
+			raf.close();
+			
+//			for (Application a : app)
+//				System.out.println(a);
+			
+		} catch (Exception e) {
+			System.out.println("Error with raf " + e);
+		} finally {
+			try { raf.close(); } catch (Exception e) {}
+		}
 	}
 	
 }
