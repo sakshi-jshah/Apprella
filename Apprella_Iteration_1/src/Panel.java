@@ -1,7 +1,5 @@
 import java.awt.Color;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -11,33 +9,27 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import org.w3c.dom.events.Event;
 
 
 public class Panel {
 	private static int loggedIn;
 	
 	private static ArrayList<Application> app;
+	private static ArrayList<Application> outstandingList;
 	private static ArrayList<Application> tempAdded;
 	
 	public static void main(String args[]) throws IOException {
 		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education", "Music", "Networking"};
 		String[] priceList = { "...", "Free", "$0.99+", "$1.99+", "$2.99+", "$3.99+"};
 		String[] ratingList = { "...", "Highet Rating", "Lowest Rating"};
-		ArrayList<Application> outstandingList = new ArrayList<Application>();
+		outstandingList = new ArrayList<Application>();
 		ArrayList<Application> tempAdded = new ArrayList<Application>();
 		
 		loadApp();
 		
-		
-		Application app1 = new Application("fun1", "000232", "Tech", "English", "08-21-2020", 1, 10, 0.99, 4.3, 2.99, true);
-		outstandingList.add(app1);
-		
+		loadOutstanding();
 
 		// Temp list of elements to test printing
 		ArrayList<String> resultTestList = new ArrayList<>();
@@ -130,6 +122,7 @@ public class Panel {
 		
 		
 		addButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JPanel tempPanel = new JPanel();
 				JTextField appnameField = new JTextField(10);
@@ -205,6 +198,7 @@ public class Panel {
 		
 		
 		sortButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<String> results = null;
 				if (genre.getSelectedItem().toString() != "...") {
@@ -215,6 +209,7 @@ public class Panel {
 		});
 		
 		searchButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String text = search.getText();
 				int temp = loggedIn;
@@ -228,6 +223,7 @@ public class Panel {
 		 * Adding the ability to login
 		 */
 		loginButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JPanel tempPanel = new JPanel();
 				JTextField usernameField = new JTextField(10);
@@ -263,6 +259,7 @@ public class Panel {
 		});
 		
 		outStandingList.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFrame outstandingFrame = new JFrame();
 				outstandingFrame.setContentPane(new Background_Panel(backgroundImage));
@@ -293,6 +290,7 @@ public class Panel {
 				outstandingFrame.add(approveButton);
 
 				approveButton.addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						JPanel tempPanel = new JPanel();
 						JTextField appnameField = new JTextField(10);
@@ -326,6 +324,7 @@ public class Panel {
 				outstandingFrame.add(removeButton);
 
 				removeButton.addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						JPanel tempPanel = new JPanel();
 						JTextField appnameField = new JTextField(10);
@@ -450,6 +449,30 @@ public class Panel {
 		}
 	}
 	
+	private static void loadOutstanding() {
+		
+		RandomAccessFile raf = null;
+		
+		try {
+			outstandingList = new ArrayList<Application>();
+			raf = new RandomAccessFile("outstandingIO", "r");
+			raf.readLine();
+			while (raf.getFilePointer() < raf.length()) {
+				Application a = new Application(raf);
+				outstandingList.add(a);
+			}
+			raf.close();
+			
+//			for (Application a : app)
+//				System.out.println(a);
+			
+		} catch (Exception e) {
+			System.out.println("Error with raf " + e);
+		} finally {
+			try { raf.close(); } catch (Exception e) {}
+		}
+	}
+	
 	private ArrayList<String> sortByPrice(JComboBox genre) {
 		double readin = Double.parseDouble(genre.getSelectedItem().toString());
 		String readout;
@@ -480,23 +503,23 @@ public class Panel {
 	
 
 	
-private static void saveApp() {
+	private static void saveApp() {
 		
-	//(new File("appIO")).delete();
-	//RandomAccessFile raf = null;
+		//(new File("appIO")).delete();
+		//RandomAccessFile raf = null;
 	
-	try {
-		//raf = new RandomAccessFile("appIO", "rw");
-		//raf.writeUTF("appName\tappUID\tcategory\tlanguage\tpublishDate\tversion\trecommendAge\tprice\trating\tsize\tcompatibility\n");
-		for (Application a : app) {
-			System.out.println(a.toString());
-			//raf.writeUTF(a.getAppName() + "\t" + a.getAppUID() + "\t" + a.getCategory() + "\t" + a.getLanguage() + "\t" + a.getPublishDate() + "\t" + a.getVersion() + "\t" + a.getRecommendAge() + "\t" + a.getPrice() + "\t" + a.getRating() + "\t" + a.getSize() + "\t" + a.isCompatibility() + "\n");
+		try {
+			//raf = new RandomAccessFile("appIO", "rw");
+			//raf.writeUTF("appName\tappUID\tcategory\tlanguage\tpublishDate\tversion\trecommendAge\tprice\trating\tsize\tcompatibility\n");
+			for (Application a : app) {
+				System.out.println(a.toString());
+				//raf.writeUTF(a.getAppName() + "\t" + a.getAppUID() + "\t" + a.getCategory() + "\t" + a.getLanguage() + "\t" + a.getPublishDate() + "\t" + a.getVersion() + "\t" + a.getRecommendAge() + "\t" + a.getPrice() + "\t" + a.getRating() + "\t" + a.getSize() + "\t" + a.isCompatibility() + "\n");
+			}
+		} catch (Exception e) {
+			System.out.println("Error with raf");
+		} finally {
+			//try {raf.close();} catch (Exception e) {}
 		}
-	} catch (Exception e) {
-		System.out.println("Error with raf");
-	} finally {
-		//try {raf.close();} catch (Exception e) {}
-	}
 	
 }
 }
