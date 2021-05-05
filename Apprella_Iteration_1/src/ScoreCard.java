@@ -85,7 +85,16 @@ public class ScoreCard {
 		}
 	}
 	
-	
+	@Override
+	public String toString() {
+		String ret = "";
+		int i = 0;
+		for (Comment c : cs) {
+			if (++i > listSize) break;
+			ret += String.format("%5d) %s\n", i, c); 
+		}
+		return ret;
+	}
 	
 	
 	//------------------------------
