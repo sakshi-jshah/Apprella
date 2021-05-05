@@ -153,7 +153,6 @@ public class inputOutputGUI {
 				comment.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						JFrame frame = new JFrame("Comments");
-						frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						frame.setSize(400, 400);
 
 						JMenuBar menuB = new JMenuBar();
@@ -184,21 +183,27 @@ public class inputOutputGUI {
 
 						Vector<String> store = new Vector<String>();
 						
+						
+						
 						String fileName = element.getAppUID() + "-comments.bin";
 						ScoreCard sc = new ScoreCard(fileName);
+						
+						store.add(sc.toString());
+						textA.append(sc.toString());
+						frame.setVisible(true);
+						frame.setVisible(false);
+
+						
 						send.addActionListener((ActionListener) new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								if (!textF.getText().isEmpty()) {
-									store.add(textF.getText());
+									// store.add(textF.getText());
 									sc.addComment(element.getAppUID(), textF.getText());
 								}
 								textA.selectAll();
 								textA.replaceSelection("");
-								Iterator<String> value = store.iterator();
-								while (value.hasNext()) {
-									textA.append(value.next() + "\n");
-								}
+								textA.append(sc.toString());
 								textF.setText("");}});
 						reset.addActionListener((ActionListener) new ActionListener() {
 							@Override

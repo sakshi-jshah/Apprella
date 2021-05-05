@@ -1,4 +1,5 @@
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -477,36 +478,25 @@ public class Panel {
 		return result;
 	}
 	
+
 	
 private static void saveApp() {
 		
-		RandomAccessFile raf = null;
-		
-		try {
-			int i = 0;
-			raf = new RandomAccessFile("appIO", "rw");
-			System.out.println("Created File");
-			System.out.println(raf.getFilePointer());
-			System.out.println(raf.readLine());
-			while (raf.getFilePointer() < raf.length()) {
-				System.out.println(raf.readLine());
-			}
-			System.out.println("Finished Read");
-
-			for (Application a : tempAdded) {
-				System.out.println(a.toString());
-				// raf.writeUTF(a.getAppName() + "\t" + a.getAppUID() + "\t" + a.getCategory() + "\t" + a.getLanguage() + "\t" + a.getPublishDate() + "\t" + a.getVersion() + "\t" + a.getRecommendAge() + "\t" + a.getPrice() + "\t" + a.getRating() + "\t" + a.getSize() + "\t" + a.isCompatibility() + "\n");
-			}
-			raf.close();
-			
-//			for (Application a : app)
-//				System.out.println(a);
-			
-		} catch (Exception e) {
-			System.out.println("Error with raf " + e);
-		} finally {
-			try { raf.close(); } catch (Exception e) {}
+	//(new File("appIO")).delete();
+	//RandomAccessFile raf = null;
+	
+	try {
+		//raf = new RandomAccessFile("appIO", "rw");
+		//raf.writeUTF("appName\tappUID\tcategory\tlanguage\tpublishDate\tversion\trecommendAge\tprice\trating\tsize\tcompatibility\n");
+		for (Application a : app) {
+			System.out.println(a.toString());
+			//raf.writeUTF(a.getAppName() + "\t" + a.getAppUID() + "\t" + a.getCategory() + "\t" + a.getLanguage() + "\t" + a.getPublishDate() + "\t" + a.getVersion() + "\t" + a.getRecommendAge() + "\t" + a.getPrice() + "\t" + a.getRating() + "\t" + a.getSize() + "\t" + a.isCompatibility() + "\n");
 		}
+	} catch (Exception e) {
+		System.out.println("Error with raf");
+	} finally {
+		//try {raf.close();} catch (Exception e) {}
 	}
 	
+}
 }
