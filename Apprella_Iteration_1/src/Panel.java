@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-
+/**
+ * A class that is the main section of the Apprella application
+ * @author Apprella Dev Team: Benjamin Lovick, Bryson Tilford, Lucia Beckman, Pu Ji, Sakshi Shah
+ *
+ */
 public class Panel {
 	private static int loggedIn;
 	
@@ -20,6 +24,11 @@ public class Panel {
 	private static ArrayList<Application> outstandingList;
 	private static ArrayList<Application> tempAdded;
 	
+	/**
+	 * Main method that will run the main application
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String args[]) throws IOException {
 		String[] genreList = { "...", "Art & Design", "Beauty", "Books", "Business", "Communication", "Education", "Music", "Networking"};
 		String[] priceList = { "...", "Free", "$0.99+", "$1.99+", "$2.99+", "$3.99+"};
@@ -27,8 +36,10 @@ public class Panel {
 		outstandingList = new ArrayList<Application>();
 		ArrayList<Application> tempAdded = new ArrayList<Application>();
 		
+		// Load the database in
 		loadApp();
 		
+		// Load the oustanding list in
 		loadOutstanding();
 
 		// Temp list of elements to test printing
@@ -70,7 +81,7 @@ public class Panel {
 		loginButton.setBounds(760, 40, 100, 20);
 		f.add(loginButton);
 		
-		// Creating Field Shrinking Ability
+		// Creating sorting ability
 		JLabel genre1Label = new JLabel("Sort Genre:");
 		genre1Label.setForeground(Color.white);
 		genre1Label.setBounds(640, 120, 220, 20);
@@ -111,6 +122,7 @@ public class Panel {
 		
 		f.add(returnArea);
 		
+		// Creating upload request button
 		JLabel addLabel = new JLabel("Submit Upload Request");
 		addLabel.setForeground(Color.white);
 		addLabel.setBounds(640, 330, 200, 20);
@@ -121,6 +133,7 @@ public class Panel {
 		f.add(addLabel);
 		
 		
+		// Action listener that allows for entry of data into upload request
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -129,7 +142,7 @@ public class Panel {
 			    JTextField appuidField = new JTextField(10);
 				tempPanel.add(new JLabel("App Name:"));
 			    tempPanel.add(appnameField);
-			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(Box.createHorizontalStrut(15));
 			    tempPanel.add(new JLabel("App UID:"));
 			    tempPanel.add(appuidField);
 			    
@@ -137,7 +150,7 @@ public class Panel {
 			    JTextField languageField = new JTextField(10);
 				tempPanel.add(new JLabel("Category:"));
 			    tempPanel.add(categoryField);
-			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(Box.createHorizontalStrut(15));
 			    tempPanel.add(new JLabel("Language:"));
 			    tempPanel.add(languageField);
 			    
@@ -145,7 +158,7 @@ public class Panel {
 			    JTextField versionField = new JTextField(10);
 				tempPanel.add(new JLabel("Publish:"));
 			    tempPanel.add(publishField);
-			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(Box.createHorizontalStrut(15));
 			    tempPanel.add(new JLabel("Version:"));
 			    tempPanel.add(versionField);
 			    
@@ -153,7 +166,7 @@ public class Panel {
 			    JTextField priceField = new JTextField(10);
 				tempPanel.add(new JLabel("Recommended Age:"));
 			    tempPanel.add(ageField);
-			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(Box.createHorizontalStrut(15));
 			    tempPanel.add(new JLabel("Price:"));
 			    tempPanel.add(priceField);
 			    
@@ -161,7 +174,7 @@ public class Panel {
 			    JTextField sizeField = new JTextField(10);
 				tempPanel.add(new JLabel("Rating"));
 			    tempPanel.add(ratingField);
-			    tempPanel.add(Box.createHorizontalStrut(15)); // a spacer
+			    tempPanel.add(Box.createHorizontalStrut(15));
 			    tempPanel.add(new JLabel("Size:"));
 			    tempPanel.add(sizeField);
 			    
@@ -196,7 +209,7 @@ public class Panel {
 			}
 		});
 		
-		
+		// Action Listener to allow for ability to sort
 		sortButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -208,6 +221,7 @@ public class Panel {
 			}
 		});
 		
+		// Action Listener that allows for searching function
 		searchButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -258,6 +272,7 @@ public class Panel {
 			}
 		});
 		
+		// Action Listener that allows for the ability for Admins to see the outstanding list
 		outStandingList.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -289,6 +304,7 @@ public class Panel {
 				approveButton.setBounds(20, 440, 100, 20);
 				outstandingFrame.add(approveButton);
 
+				// Action listener that allows for requests to be approved
 				approveButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -323,6 +339,7 @@ public class Panel {
 				removeButton.setBounds(140, 440, 100, 20);
 				outstandingFrame.add(removeButton);
 
+				// Action listener that allows for requests to be removed
 				removeButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -370,6 +387,8 @@ public class Panel {
 		f.setSize(1000,680);
 		f.setLayout(null);
 		f.setVisible(true);
+		
+		// Action listener to confirm exit of program
 		f.addWindowListener(new WindowListener() {
 
 	        @Override
@@ -425,6 +444,9 @@ public class Panel {
 		
 	}
 	
+	/**
+	 * Method that loads the database into the application
+	 */
 	private static void loadApp() {
 		
 		RandomAccessFile raf = null;
@@ -449,6 +471,9 @@ public class Panel {
 		}
 	}
 	
+	/**
+	 * Method that loads the outstanding list into the application
+	 */
 	private static void loadOutstanding() {
 		
 		RandomAccessFile raf = null;
@@ -473,6 +498,11 @@ public class Panel {
 		}
 	}
 	
+	/**
+	 * Method to sort by genre
+	 * @param genre the genre
+	 * @return strings that are the sorted apps
+	 */
 	private ArrayList<String> sortByPrice(JComboBox genre) {
 		double readin = Double.parseDouble(genre.getSelectedItem().toString());
 		String readout;
@@ -487,7 +517,11 @@ public class Panel {
 		return result;
 	}
 
-
+	/**
+	 * Method to sort by type
+	 * @param genre the genre type
+	 * @return strings that are the sorted apps
+	 */
 	private static ArrayList<String> sortByType(JComboBox genre) {
 		String ret = genre.getSelectedItem().toString();
 		
@@ -502,7 +536,9 @@ public class Panel {
 	}
 	
 
-	
+	/**
+	 * Method to save the data back into the database (NOT WORKING AT CURRENT VERSION)
+	 */
 	private static void saveApp() {
 		
 		//(new File("appIO")).delete();

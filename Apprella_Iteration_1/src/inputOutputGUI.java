@@ -22,6 +22,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+/**
+ * Class to handle the input output operations from the GUI and backend
+ * @author Apprella Dev Team: Benjamin Lovick, Bryson Tilford, Lucia Beckman, Pu Ji, Sakshi Shah
+ *
+ */
 public class inputOutputGUI {
 
 	private HashMap<String, String> users;
@@ -49,11 +54,13 @@ public class inputOutputGUI {
 	
 	
 	/**
-	 * Takes a list and searches and returns words containing it or are equal to it
-	 * @param list
-	 * @param textArea
-	 * @param str
-	 * @throws Exception 
+	 * Method to search for and return applications
+	 * @param list string list of all application names
+	 * @param textArea the text area that the data could be printed to
+	 * @param str the inputted data
+	 * @param j the jframe that is the main frame for the application
+	 * @param app the lists of applications
+	 * @param num the current value of wether the user is logged in
 	 */
 	public void searchResults(ArrayList<String> list, JTextArea textArea, String str, JFrame j, ArrayList<Application> app, int num) 
 	{
@@ -73,6 +80,7 @@ public class inputOutputGUI {
 				
 				frameSearch.setContentPane(new Background_Panel(backgroundImage));
 
+				// Printing out data to show app and all parts of the app
 				JLabel initLabel = new JLabel("App Searched for:");
 				initLabel.setForeground(Color.white);
 				initLabel.setBounds(20, 20, 200, 20);
@@ -150,6 +158,7 @@ public class inputOutputGUI {
 				
 				frameSearch.add(comment);
 
+				// Adding comment section button that will pull up the comment section
 				comment.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						JFrame frame = new JFrame("Comments");
@@ -265,7 +274,12 @@ public class inputOutputGUI {
 		}
 	}
 	
-	
+	/**
+	 * Method to login a user as a user, moderator, or admin
+	 * @param username inputed user name attempt
+	 * @param password inputed password attempt
+	 * @return integer value based on login (0 = not logged in, 1 = user, 2 = moderator, 3 = admin)
+	 */
 	public int checkUser(String username, String password) {
 		
 		System.out.println(administrators.containsKey(username));
