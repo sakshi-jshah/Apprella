@@ -15,18 +15,18 @@ class CommentSection {
 		JMenuBar menuB = new JMenuBar();
 		JMenu menuB1 = new JMenu("Go back");
 		JMenu menuB2 = new JMenu("Help");
-		menuB.add(menuB1);
-		menuB.add(menuB2);
+		menuB.add( menuB1 );
+		menuB.add( menuB2 );
 		JMenuItem menuB11 = new JMenuItem("Yes");
 		JMenuItem menuB22 = new JMenuItem("Open");
-		menuB1.add(menuB11);
-		menuB2.add(menuB22);
+		menuB1.add( menuB11 );
+		menuB2.add( menuB22 );
 
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel("Leave Comment");
 		JTextField textF = new JTextField(10);
-		JButton send = new JButton("Send");
-		JButton reset = new JButton("Delete");
+		JButton send = new JButton( "Send" );
+		JButton reset = new JButton( "Delete" );
 		panel.add(label);
 		panel.add(textF);
 		panel.add(send);
@@ -35,34 +35,59 @@ class CommentSection {
 		JTextArea textA = new JTextArea();
 
 		Vector<String> store = new Vector<String>();
-		send.addActionListener((ActionListener) new ActionListener() {
+		
+		send.addActionListener( (ActionListener) new ActionListener() {
 			@Override
+			
 			public void actionPerformed(ActionEvent e) {
-				if (!textF.getText().isEmpty()) {
-					store.add(textF.getText());
-				}
-				textA.selectAll();
+				if ( !textF.getText().isEmpty() ) {
+					
+					store.add( textF.getText() );
+				}		
 				textA.replaceSelection("");
+				
+				textA.selectAll();
+				
 				Iterator<String> value = store.iterator();
+				
 				while (value.hasNext()) {
+				
 					textA.append(value.next() + "\n");
+				
 				}
+				
 				textF.setText("");}});
+		
 		reset.addActionListener((ActionListener) new ActionListener() {
+			
 			@Override
+			
 			public void actionPerformed(ActionEvent e) {
+				
 				if (store.size() > 0) {
+					
 					store.remove(store.size() - 1);
+				
 				}
+				
 				textA.selectAll();
+				
 				textA.replaceSelection("");
+				
 				Iterator<String> value = store.iterator();
+				
 				while (value.hasNext()) {
+					
 					textA.append(value.next() + "\n");}}});
 
 		frame.getContentPane().add(BorderLayout.SOUTH, panel);
-		frame.getContentPane().add(BorderLayout.NORTH, menuB);
+		
 		frame.getContentPane().add(BorderLayout.CENTER, textA);
+		
+		frame.getContentPane().add(BorderLayout.NORTH, menuB);
+		
+		
+		
 		frame.setVisible(true);
 	}
 }
