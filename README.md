@@ -1,4 +1,4 @@
-# Apprella | Created May 5 2021 
+# Apprella | Created May 6 2021 
 ------------------------------------
 Aprella is made for adding, sorting and storing appilcations--Tiktok, Instagram, Spotify etc.. 
 Apprella was made for those who wish to store appilcations. To start the application open up
