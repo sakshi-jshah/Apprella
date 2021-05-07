@@ -17,7 +17,7 @@ edit request.
 
 Bugs
 ------------------------------------
-
+Rarely not being able to save file 
 
 Changelog 
 ------------------------------------
