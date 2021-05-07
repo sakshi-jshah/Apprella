@@ -14,6 +14,8 @@ Below the Sorting Section, the user can request to add applications. Clicking th
 will display a window where the user is able to type in the details of the application. The 
 request application is sent to the request page where the Administrator is able to view and 
 edit request. 
+    To close the appilcation Window simply click the 'X' button in the top right. A window 
+will appearing asking "Are you sure you want to quit?" says 'yes' or 'no'.
 
 Bugs
 ------------------------------------
